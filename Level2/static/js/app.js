@@ -1,10 +1,11 @@
 // from data.js
 var tableData = data;
-
-var citykey = [], text, len, i, cix, a;
-var statekey = [], stx;
+var text, len, i, a
+var citykey = [],  cix, cityselected = [];
+var statekey = [], stx, stateselected = [];
 var countrykey = [], cox;
-var shapekey = [], shx;
+var shapekey = [], shx, shapeselected = [];
+var itemselected = [];
 
 function generateDropDowns(data) {
   var keys = ['city','state','country','shape'];
@@ -12,27 +13,27 @@ function generateDropDowns(data) {
   for (let datarow of data) {
 
     let cix = (datarow[keys[0]]);
-    var a = citykey.indexOf(cix);
+    a = citykey.indexOf(cix);
     if (a === -1) {
       citykey.push(cix);
     }
 
     let stx = (datarow[keys[1]]);
-    var a = statekey.indexOf(stx);
+    a = statekey.indexOf(stx);
     if (a === -1) {
       statekey.push(stx);
     }
 
   
     let cox = (datarow[keys[2]]);
-    var a = countrykey.indexOf(cox);
+    a = countrykey.indexOf(cox);
     if (a === -1) {
       countrykey.push(cox);
     }
 
 
     let shx = (datarow[keys[3]]);
-    var a = shapekey.indexOf(shx);
+    a = shapekey.indexOf(shx);
     if (a === -1) {
       shapekey.push(shx);
     }
@@ -41,7 +42,7 @@ function generateDropDowns(data) {
 
   len = citykey.length;
 
-  text = "<option></option>";
+  text = "<option>All</option>";
   for (i = 0; i < len; i++) {
     text += "<option>" + citykey[i] + "</option>";
   }
@@ -50,7 +51,7 @@ function generateDropDowns(data) {
 
   len = statekey.length;
 
-  text = "<option></option>";
+  text = "<option>All</option>";
   for (i = 0; i < len; i++) {
     text += "<option>" + statekey[i] + "</option>";
   }
@@ -59,7 +60,7 @@ function generateDropDowns(data) {
 
   len = countrykey.length;
 
-  text = "<option></option>";
+  text = "<option>All</option>";
   for (i = 0; i < len; i++) {
     text += "<option>" + countrykey[i] + "</option>";
   }
@@ -68,7 +69,7 @@ function generateDropDowns(data) {
   
   len = shapekey.length;
 
-  text = "<option></option>";
+  text = "<option>All</option>";
   for (i = 0; i < len; i++) {
     text += "<option>" + shapekey[i] + "</option>";
   }
@@ -94,10 +95,10 @@ function generateDropDowns(data) {
         // rows to be displayed.
 
       if (element['datetime'] === date || date == undefined || date == "") {
-        if (element['city'] === city || city == undefined || city == '') {
-          if (element['state'] === state || state == undefined || state == '') {
-            if (element['country'] === country || country == undefined || country == '') {
-              if (element['shape'] === shape || shape == undefined || shape == '') {
+        if (cityselected.indexOf(element['city']) != -1 || city == undefined || cityselected.indexOf('All') != -1 || cityselected.length === 0)  {
+          if (stateselected.indexOf(element['state']) != -1 || state == undefined || stateselected.indexOf('All') != -1 || stateselected.length === 0) {
+            if (element['country'] === country || country == undefined || country === 'All') {
+              if (shapeselected.indexOf(element['shape']) != -1 || shape == undefined || shapeselected.indexOf('All') != -1 || shapeselected.length === 0) {
                 // Insert the row and than append each cell.
                 let row = table.insertRow();
                 for (key in element) {
@@ -114,14 +115,23 @@ function generateDropDowns(data) {
     }
   }
 // Clear out the table from the previous filter
-   function clearTable(table,table_size) {
+  function clearTable(table,table_size) {
 
     for (var i=0; i < table_size - 1; i++) {
         table.deleteRow(0);
         
     }
-   }
+  }
 
+  function itemsselected(keyname) {
+   itemselected = [];
+   for (var i=0; i < keyname.options.length; i++){
+    if (keyname.options[i].selected==true){
+      itemselected.push(keyname.options[i].text);
+    }
+   }
+   return itemselected
+  }
   // set table to start after tbody since the header is there already.
   let table = document.querySelector("tbody");
 
@@ -134,16 +144,25 @@ function generateDropDowns(data) {
   // filter table basd on the input from the terminal.
   function checkinput() {
     var date = document.getElementById("datetime").value;
-    var city = document.getElementById("cityselect").value;
-    var state = document.getElementById("stateselect").value;
+    var city = document.getElementById("cityselect");
+    var state = document.getElementById("stateselect");
     var country = document.getElementById("countryselect").value;
-    var shape = document.getElementById("shapeselect").value;
+    var shape = document.getElementById("shapeselect");
 
     var table_size = document.getElementById("ufo-table").rows.length;
-//    console.log(table_size);
+
+    // determine selection
+    cityselected = itemsselected(city);
+    console.log(cityselected);
+    stateselected = itemsselected(state);
+    console.log(stateselected);
+    shapeselected = itemsselected(shape);
+    console.log(shapeselected);
+//    itemsselected(city);
+    console.log(country);
+
     // clear the table and then check for the right date range.
     clearTable(table, table_size);
-    console.log(city,country, shape, state);
     // If in the right date range provde the results otherwise provde an alert
     // and refresh with a full table.
     if (date >= '1/1/2010' && date <='1/13/2010' || date == "") {
@@ -156,3 +175,4 @@ function generateDropDowns(data) {
         generateTable(table, tableData);
     }
 }
+
