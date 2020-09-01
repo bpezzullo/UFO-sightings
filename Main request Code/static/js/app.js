@@ -55,7 +55,7 @@ var tableData = data;
 
     // If in the right date range provde the results otherwise provde an alert
     // and refresh with a full table.
-    if (date >= '1/1/2010' && date <='1/13/2010') {
+    if (date >= '1/1/2010' && date <='1/13/2010' || date == "") {
         
         generateTable(table, tableData, date);  
     }
