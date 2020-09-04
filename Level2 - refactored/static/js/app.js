@@ -1,6 +1,6 @@
 // from data.js
 var tableData = data;
-var a;
+
 var citykey = [],  cix, cityselected = [];
 var statekey = [], stx, stateselected = [];
 var countrykey = [], cox;
@@ -30,9 +30,8 @@ function generateDropDowns(data) {
 
 // loop through the data to find the information needed for the drop down lists for city
 // state, country and shape.
-
-  for (let datarow of data) {
-    // get the value of the first key "city" and then check to see if the city from the
+  data.forEach(datarow => {
+        // get the value of the first key "city" and then check to see if the city from the
     // datarow has already been captured by checking to see if it is in the citykey array.
     // if it has been skip down to the next key.  If not than push it into the array.
     
@@ -65,7 +64,11 @@ function generateDropDowns(data) {
       shapekey.push(shx);
     }
 
-  }
+  });
+
+// Sort items
+
+
 // now create a text which will be used to modify the HTML for the drop downs.  Include
 // All as the first item.
   
@@ -77,7 +80,7 @@ function generateDropDowns(data) {
   
   document.getElementById("shapeselect").innerHTML = generatetxt(shapekey);
 
-}
+  }
 
 
 
@@ -90,11 +93,18 @@ function generateDropDowns(data) {
   function generateTable(table, data, date, city, state, country, shape) {
 
 // for each element or row in the table than insert the row into the HTML table.
-    for (let element of data) {
+    data.forEach(element => {
 
         // Check whether a date is provided.  If provided only pull those
         // rows to be displayed.  
-        // Extended
+        // Extended to include filtering based on city, state, country and shape.
+        // For each item after date
+        //   * if input is undefined that means the user hasn't selected  anything and
+        //     assume that all was selected.  
+        //   * If input is set to All then display all of that
+        //     key / type.  
+        //   * If the length is 0 of the than assume all entries for the type.
+        //   * otherwise only add row that has a the selected value.
 
       if (element['datetime'] === date || date == undefined || date == "") {
         if (cityselected.indexOf(element['city']) != -1 || city == undefined || cityselected.indexOf('All') != -1 || cityselected.length === 0)  {
@@ -104,7 +114,7 @@ function generateDropDowns(data) {
                 // Insert the row and than append each cell.
                 let row = table.insertRow();
                 for (key in element) {
-                
+                    // insert information into table for display.
                     let cell = row.insertCell();
                     let text = document.createTextNode(element[key]);
                     cell.appendChild(text);
@@ -114,7 +124,7 @@ function generateDropDowns(data) {
           }
         }
       }
-    }
+    });
   }
 // Clear out the table from the previous filter
   function clearTable(table,table_size) {
@@ -134,6 +144,7 @@ function generateDropDowns(data) {
    }
    return itemselected
   }
+
   // set table to start after tbody since the header is there already.
   let table = document.querySelector("tbody");
 

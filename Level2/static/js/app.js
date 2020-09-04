@@ -94,7 +94,15 @@ function generateDropDowns(data) {
 
         // Check whether a date is provided.  If provided only pull those
         // rows to be displayed.  
-        // Extended
+        // Extended to include filtering based on city, state, country and shape.
+        // For each item after date
+        //   * if input is undefined that means the user hasn't selected  anything and
+        //     assume that all was selected.  
+        //   * If input is set to All then display all of that
+        //     key / type.  
+        //   * If the length is 0 of the than assume all entries for the type.
+        //   * otherwise only add row that has a the selected value
+
 
       if (element['datetime'] === date || date == undefined || date == "") {
         if (cityselected.indexOf(element['city']) != -1 || city == undefined || cityselected.indexOf('All') != -1 || cityselected.length === 0)  {
