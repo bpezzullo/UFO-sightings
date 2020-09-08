@@ -67,7 +67,9 @@ function generateDropDowns(data) {
   });
 
 // Sort items
-
+citykey.sort();
+statekey.sort();
+shapekey.sort();
 
 // now create a text which will be used to modify the HTML for the drop downs.  Include
 // All as the first item.
@@ -81,7 +83,6 @@ function generateDropDowns(data) {
   document.getElementById("shapeselect").innerHTML = generatetxt(shapekey);
 
   }
-
 
 
 // Function that builds the table with 3 inputs.  Table structure, the data, and 
