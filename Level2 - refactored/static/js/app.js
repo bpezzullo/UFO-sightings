@@ -66,13 +66,13 @@ function generateDropDowns(data) {
 
   });
 
-// Sort items
-citykey.sort();
-statekey.sort();
-shapekey.sort();
+  // Sort items
+  citykey.sort();
+  statekey.sort();
+  shapekey.sort();
 
-// now create a text which will be used to modify the HTML for the drop downs.  Include
-// All as the first item.
+  // now create a text which will be used to modify the HTML for the drop downs.  Include
+  // All as the first item.
   
   document.getElementById("cityselect").innerHTML = generatetxt(citykey);
   
@@ -91,102 +91,113 @@ shapekey.sort();
 // or undefined than generate the full table.  If a data is provided than only
 // provide those sightings.
 
-  function generateTable(table, data, date, city, state, country, shape) {
+function generateTable(table, data, date, city, state, country, shape) {
 
 // for each element or row in the table than insert the row into the HTML table.
-    data.forEach(element => {
+  data.forEach(element => {
 
-        // Check whether a date is provided.  If provided only pull those
-        // rows to be displayed.  
-        // Extended to include filtering based on city, state, country and shape.
-        // For each item after date
-        //   * if input is undefined that means the user hasn't selected  anything and
-        //     assume that all was selected.  
-        //   * If input is set to All then display all of that
-        //     key / type.  
-        //   * If the length is 0 of the than assume all entries for the type.
-        //   * otherwise only add row that has a the selected value.
+      // Check whether a date is provided.  If provided only pull those
+      // rows to be displayed.  
+      // Extended to include filtering based on city, state, country and shape.
+      // For each item after date
+      //   * if input is undefined that means the user hasn't selected  anything and
+      //     assume that all was selected.  
+      //   * If input is set to All then display all of that
+      //     key / type.  
+      //   * If the length is 0 of the than assume all entries for the type.
+      //   * otherwise only add row that has a the selected value.
 
-      if (element['datetime'] === date || date == undefined || date == "") {
-        if (cityselected.indexOf(element['city']) != -1 || city == undefined || cityselected.indexOf('All') != -1 || cityselected.length === 0)  {
-          if (stateselected.indexOf(element['state']) != -1 || state == undefined || stateselected.indexOf('All') != -1 || stateselected.length === 0) {
-            if (element['country'] === country || country == undefined || country === 'All') {
-              if (shapeselected.indexOf(element['shape']) != -1 || shape == undefined || shapeselected.indexOf('All') != -1 || shapeselected.length === 0) {
-                // Insert the row and than append each cell.
-                let row = table.insertRow();
-                for (key in element) {
-                    // insert information into table for display.
-                    let cell = row.insertCell();
-                    let text = document.createTextNode(element[key]);
-                    cell.appendChild(text);
-                }
+    if (element['datetime'] === date || date == undefined || date == "") {
+      if (cityselected.indexOf(element['city']) != -1 || city == undefined || cityselected.indexOf('All') != -1 || cityselected.length === 0)  {
+        if (stateselected.indexOf(element['state']) != -1 || state == undefined || stateselected.indexOf('All') != -1 || stateselected.length === 0) {
+          if (element['country'] === country || country == undefined || country === 'All') {
+            if (shapeselected.indexOf(element['shape']) != -1 || shape == undefined || shapeselected.indexOf('All') != -1 || shapeselected.length === 0) {
+              // Insert the row and than append each cell.
+              let row = table.insertRow();
+              for (key in element) {
+                  // insert information into table for display.
+                  let cell = row.insertCell();
+                  let text = document.createTextNode(element[key]);
+                  cell.appendChild(text);
               }
             }
           }
         }
       }
-    });
-  }
+    }
+  });
+}
 // Clear out the table from the previous filter
-  function clearTable(table,table_size) {
+function clearTable(table,table_size) {
 
-    for (var i=0; i < table_size - 1; i++) {
-        table.deleteRow(0);
-        
-    }
+  for (var i=0; i < table_size - 1; i++) {
+      table.deleteRow(0);
+      
   }
-
-  function itemsselected(keyname) {
-   itemselected = [];
-   for (var i=0; i < keyname.options.length; i++){
-    if (keyname.options[i].selected==true){
-      itemselected.push(keyname.options[i].text);
-    }
-   }
-   return itemselected
-  }
-
-  // set table to start after tbody since the header is there already.
-  let table = document.querySelector("tbody");
-
-
-  // generate the table the first time the page is loaded.
-  generateTable(table, tableData);
-
-  generateDropDowns(tableData);
-
-  // filter table basd on the input from the terminal.
-  function checkinput() {
-    var date = document.getElementById("datetime").value;
-    var city = document.getElementById("cityselect");
-    var state = document.getElementById("stateselect");
-    var country = document.getElementById("countryselect").value;
-    var shape = document.getElementById("shapeselect");
-
-    var table_size = document.getElementById("ufo-table").rows.length;
-
-    // determine selection
-    cityselected = itemsselected(city);
-    //console.log(cityselected);
-    stateselected = itemsselected(state);
-    //console.log(stateselected);
-    shapeselected = itemsselected(shape);
-    //console.log(shapeselected);
-//    itemsselected(city);
-    //console.log(country);
-
-    // clear the table and then check for the right date range.
-    clearTable(table, table_size);
-    // If in the right date range provde the results otherwise provde an alert
-    // and refresh with a full table.
-    if (date >= '1/1/2010' && date <='1/13/2010' || date == "") {
-        
-        generateTable(table, tableData, date, city, state, country, shape);  
-    }
-    else {
-
-        alert("Please enter a date between 1/1/2010 and 1/13/2010!");
-        generateTable(table, tableData);
-    }
 }
 
+function itemsselected(keyname) {
+  itemselected = [];
+  for (var i=0; i < keyname.options.length; i++){
+  if (keyname.options[i].selected==true){
+    itemselected.push(keyname.options[i].text);
+  }
+  }
+  return itemselected
+}
+
+// set table to start after tbody since the header is there already.
+let table = document.querySelector("tbody");
+
+// grab references to the input element and the output div
+var cityclick = d3.select(".cityselect");
+
+
+
+// generate the table the first time the page is loaded.
+generateTable(table, tableData);
+
+generateDropDowns(tableData);
+
+// filter table basd on the input from the terminal.
+function checkinput() {
+  var date = document.getElementById("datetime").value;
+  var city = document.getElementById("cityselect");
+  var state = document.getElementById("stateselect");
+  var country = document.getElementById("countryselect").value;
+  var shape = document.getElementById("shapeselect");
+
+  var table_size = document.getElementById("ufo-table").rows.length;
+
+  // determine selection
+  cityselected = itemsselected(city);
+  //console.log(cityselected);
+  stateselected = itemsselected(state);
+  //console.log(stateselected);
+  shapeselected = itemsselected(shape);
+  //console.log(shapeselected);
+//    itemsselected(city);
+  //console.log(country);
+
+  // clear the table and then check for the right date range.
+  clearTable(table, table_size);
+  // If in the right date range provde the results otherwise provde an alert
+  // and refresh with a full table.
+  if (date >= '1/1/2010' && date <='1/13/2010' || date == "") {
+      
+      generateTable(table, tableData, date, city, state, country, shape);  
+  }
+  else {
+
+      alert("Please enter a date between 1/1/2010 and 1/13/2010!");
+      generateTable(table, tableData);
+  }
+}
+function handleCityChange(event) {
+  // grab the value of the input field
+  console.log(event);
+  var inputCity = d3.event.target.value;
+  console.log(inputCity);
+}
+
+cityclick.on("mouseover", handleCityChange);
