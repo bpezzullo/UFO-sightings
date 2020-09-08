@@ -1,5 +1,16 @@
 # JavaScript Homework - JavaScript and DOM Manipulation
 
+## Assignment
+
+There are 2 directories in the repository.  The first one covers the main request to filter by date.  The below picture shows what it would look like.
+
+* [UFO Sightings Level 1](Annotation 2020-09-08 174529.png)
+
+The second directory is called Level2 and includes the request to filter on all the fields.  That was provided and some of the fields City, state and shape are 
+multi-selection capable.  Below is a screenshot of the webpage look.
+
+* [UFO Sightings Level 2](Annotation 2020-09-08 174031.png)
+
 ## Background
 
 WAKE UP SHEEPLE! The extra-terrestrial menace has come to Earth and we here at `ALIENS-R-REAL` have collected all of the eye-witness reports we could to prove it! All we need to do now is put this information online for the world to see and then the matter will finally be put to rest.
