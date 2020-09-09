@@ -2,15 +2,17 @@
 
 ## Assignment
 
-There are 2 directories in the repository.  The first one covers the main request to filter by date.  The below picture shows what it would look like.
+There are 2 directories in the repository.  The first one covers the main request to filter by date.  The below picture shows what it would look like.  Open the index.html file under the directory to see the application.  Enter a date and hit the filter button to filter down the data.  If you enter an invalid date an alert message will pop up.
 
 ![UFO Sightings Level 1](Annotation 2020-09-08 174529.png)
 
 
 The second directory is called Level2 and includes the request to filter on all the fields.  That was provided and some of the fields City, state and shape are 
-multi-selection capable.  Below is a screenshot of the webpage look.
+multi-selection capable.  Below is a screenshot of the webpage look.  Opend the index.html file from the Level2 directory to see the application.  Enter a date or any other input to filter down the data.  The city, state and shape are multi select fields.
 
 * [UFO Sightings Level 2](Annotation 2020-09-08 174031.png)
+
+
 
 ## Background
 
