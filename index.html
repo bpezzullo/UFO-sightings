@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+<head>
+    <meta charset="UTF-8">
+    <title>UFO</title>
+
+    <!-- Bring in our bootstrap stylesheet -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <style>
+        body,
+        html {
+            height: 100%;
+            padding-left: 5px;
+            padding-right: 5px;
+        }
+
+        .dataframe {
+            /* background-color:lightgrey; */
+            font-size: 20px;
+            size: 40px;
+            margin-top: 50px;
+        }
+
+        .bg {
+            background-image: url('analytics-1907993__340.jpg');
+
+            /* Half height */
+            height: 100%;
+
+            /* Center and scale the image nicely */
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+
+        .mtitle {
+
+            width: 100%;
+            text-align: center;
+            font-family: sans-serif;
+            font-style: italic;
+            font-size: 80px;
+        }
+
+
+        a:link {
+            color: #ccc;
+        }
+
+        /* visited link */
+        a:visited {
+            color: #043655;
+        }
+
+        /* mouse over link */
+        a:hover {
+            color: #8ebf42;
+        }
+
+        /* selected link */
+        a:active {
+            color: #800000;
+        }
+
+        .mabout {
+            font-size: 20px;
+        }
+
+        .p {
+            padding-left: 5px;
+        }
+
+        .rgba-gradient {
+            background: -moz-linear-gradient(45deg, rgba(42, 27, 161, 0.7), rgba(29, 210, 177, 0.7) 100%);
+            background: -webkit-linear-gradient(45deg, rgba(42, 27, 161, 0.7), rgba(29, 210, 177, 0.7) 100%);
+            background: -webkit-gradient(linear, 45deg, from(rgba(42, 27, 161, 0.7)), to(rgba(29, 210, 177, 0.7)));
+            background: -o-linear-gradient(45deg, rgba(42, 27, 161, 0.7), rgba(29, 210, 177, 0.7) 100%);
+            background: linear-gradient(to 45deg, rgba(42, 27, 161, 0.7), rgba(29, 210, 177, 0.7) 100%);
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Our rows function in containers (grid created). -->
+    <div class="container rgba-gradient">
+        <hr>
+        <h1 class="mtitle">UFO sightings</h1>
+        <hr>
+        <div class="row dataframe">
+            <div class="col-md-11">
+                <p> </p>
+                <u>Goal:</u>
+                Build a set a web page that allows the user search website csv file / database.
+                <br>
+                There are 2 directories in the repository. The first one covers the main request to filter by date. The
+                below picture shows what it would look like. Open the index.html file under the directory to see the
+                application. Enter a date and hit the filter button to filter down the data. 
+                <li>UFO Sightings Level 1
+                    <img src="Annotation_2020-09-08_174529.png" alt="Single date criteria">
+                </li>
+                The second directory is called Level2 and includes the request to filter on all the fields. That was
+                provided and some of the fields City, state and shape are multi-selection capable. Below is a screenshot
+                of the webpage look. Opend the index.html file from the Level2 directory to see the application. Enter a
+                date or any other input to filter down the data. The city, state and shape are multi select fields.
+                <li>UFO Sightings Level 2
+                    <img src="Annotation_2020-09-08_174031.png" alt="Multiple criteria">
+                </li>
+
+                Created a basic HTML web page.
+                Using an UFO dataset in the form of an array of JavaScript objects, create the drop downs and table.
+                Used multiple input tags and select dropdowns, so the user can to set multiple filters and search for
+                UFO sightings using criteria based on the table columns:
+
+                <ul>
+                    <li>date/time</li>
+                    <li>city </li>
+                    <li>state </li>
+                    <li>country </li>
+                    <li>shape</li>
+                    <li>Dataset</li>
+                    <li>UFO Sightings Data</li>
+                </ul>
+            </div>
+        </div>
+        <div class="row dataframe">
+            <div class="col-md-11">
+                <u>Links and information</u>
+                <p> </p>
+                <br>
+                <a href="Level2/index.html">UFO search</a>
+                <p> </p>
+            </div>
+        </div>
+    </div>
+</body>
